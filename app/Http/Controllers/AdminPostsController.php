@@ -21,6 +21,7 @@ class AdminPostsController extends Controller
      */
     public function index()
     {
+        // fetching all post from database
         $posts = Post::all();
     
         return view('admin.posts.index',compact('posts'));
@@ -33,6 +34,8 @@ class AdminPostsController extends Controller
      */
     public function create()
     {
+        // here showing category option in  'create post page' for user so that he/she can choose the category
+        // for post
         $category = Category::lists('name','id')->all();
         return view('admin.posts.create',compact('category'));
     
@@ -46,9 +49,12 @@ class AdminPostsController extends Controller
      */
     public function store(PostsCreateRequest $request)
     {
-        $user = Auth::user();
+        $user = Auth::user();//authenticating user if login or not
         
         $input=$request->all();
+        
+        //storing photo for each post with validation
+        
         if($file = $request->file('photo_id')){
     
             $name = time().$file->getClientOriginalName();
@@ -86,6 +92,8 @@ class AdminPostsController extends Controller
     public function edit($id)
     {
         $post = Post::findOrfail($id);
+        
+        // for editing category
         $category = Category::lists('name','id')->all();
     
         return view('admin.posts.edit',compact('post','category'));
@@ -102,6 +110,7 @@ class AdminPostsController extends Controller
     {
     
         $input=$request->all();
+        //storing photo for each post with validation
     
         if($file = $request->file('photo_id')){
         
@@ -112,6 +121,8 @@ class AdminPostsController extends Controller
             $photo = Photo::create(['file'=>$name]);
             $input['photo_id']= $photo->id;
         }
+        
+        // only logged in valid user can update their post
         
         Auth::user()->post()->whereId($id)->first()->update($input);
         return redirect('admin/posts');
@@ -127,7 +138,8 @@ class AdminPostsController extends Controller
     public function destroy($id)
     {
         $post =Post::findOrFail($id);
-    
+        
+        //with deleting user we are removing the public path of the photo in image folder
         unlink(public_path() . $post->photo->file );
         $post->delete();
         return redirect('admin/posts');
