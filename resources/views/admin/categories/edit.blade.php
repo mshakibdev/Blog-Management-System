@@ -23,6 +23,20 @@
         {{csrf_field()}}
 
         {!! Form::close() !!}
+
+        {!! Form::close() !!}
+
+        {!! Form::model($category,['method'=>'DELETE','action'=>['AdminCategoriesController@destroy',$category->id],'files'=>true]) !!}
+
+        <div class="form-group">
+            {!! Form::submit('DELETE Category ',['class'=>'btn btn-danger ']) !!}
+        </div>
+
+        {{csrf_field()}}
+
+        {!! Form::close() !!}
+
+
     </div>
 
 @endsection
