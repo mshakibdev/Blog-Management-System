@@ -12,6 +12,8 @@
             <th scope="col">Image</th>
             <th scope="col">Path</th>
             <th scope="col">Created</th>
+            <th scope="col"></th>
+            <th scope="col">Action</th>
         </tr>
         </thead>
         @if($photos)
@@ -24,6 +26,17 @@
                     <td>{{ $photo->file}}</td>
                     <td>{{ $photo->created_at ? $photo->created_at->diffForHumans() : 'No date' }}</td>
                     <td>{{ $photo->email}}</td>
+                    <td>
+                        {!! Form::model($photo,['method'=>'DELETE','action'=>['MediaController@destroy',$photo->id],'files'=>true]) !!}
+
+                        <div class="form-group">
+                            {!! Form::submit('DELETE ',['class'=>'btn btn-danger ']) !!}
+                        </div>
+
+                        {{csrf_field()}}
+
+                        {!! Form::close() !!}
+                    </td>
                 </tr>
                 </tbody>
             @endforeach

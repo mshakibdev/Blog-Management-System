@@ -5,6 +5,8 @@
 @stop
 
 @section('content')
+    <h1 class="text-center">Upload  Media</h1>
+    <hr>
     {!! Form::open(['method'=>'POST','action'=>'MediaController@store' ,'class'=>'dropzone', 'id'=>'my-awesome-dropzone']) !!}
 
 
