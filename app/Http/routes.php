@@ -15,6 +15,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
 Route::auth();
 
 Route::get('/home', 'HomeController@index');
@@ -27,15 +28,31 @@ Route::get('/admin',function(){
 
 
 
-Route::group(['middleware'=>'admin'],function(){
+Route::group(['middleware'=>'admin',],function(){
 
     Route::resource('admin/users','AdminUsersController');
     Route::resource('admin/posts','AdminPostsController');
     Route::resource('admin/categories','AdminCategoriesController');
     Route::resource('admin/media','MediaController');
     
+    Route::resource('admin/comments','PostCommentsController');
+    Route::resource('admin/comments/replies','CommentRepliesController');
+    
+    
+    
     
     
     
 });
 
+
+Route::get('post/{id}','AdminPostsController@post');
+
+// user route
+//
+//Route::get('blog',function(){
+//    return view('layouts.blog-home');
+//});
+    Route::get('blog','BlogController@index')->name('home');
+    Route::get('post-details/{id}','BlogController@postDetails')->name('post-details');
+  //  Route::get('post-list/{id}','BlogController@postListByUser')->name('post-list');

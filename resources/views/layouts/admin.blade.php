@@ -21,7 +21,10 @@
     <link href="{{asset('css/libs/bootstrap.css/bootstrap.min.css')}}" rel="stylesheet">
     <link href="{{asset('sass/app.css')}}" rel="stylesheet">
     <link href="{{asset('fonts/FontAwesome.otf')}}" >
-    @yield('styles')
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+
+@yield('styles')
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -29,7 +32,6 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
 
 
 
@@ -61,7 +63,8 @@
             <!-- /.dropdown -->
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                    <i class="far fa-user"></i>
+                    <span class="badge badge-secondary">{{Auth::user()->name}}</span></h1>
                 </a>
                 <ul class="dropdown-menu dropdown-user">
                     <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
@@ -69,7 +72,7 @@
                     <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
                     </li>
                     <li class="divider"></li>
-                    <li><a href="{{ url('/logout') }}"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                    <li><a href="{{ url('/logout') }}"><i class="fas fa-sign-out-alt"></i> Logout</a>
                     </li>
                 </ul>
                 <!-- /.dropdown-user -->
@@ -123,18 +126,18 @@
                         <!-- /input-group -->
                     </li>
                     <li>
-                        <a href="/admin"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                        <a href="/admin"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
                     </li>
 
                     <li>
-                        <a href="#"><i class="fa fa-wrench fa-fw"></i>Users<span class="fa arrow"></span></a>
+                        <a href="#"><i class="fas fa-user"></i> Users<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="{{route('admin.users.index')}}">All Users</a>
+                                <a href="{{route('admin.users.index')}}"><i class="fas fa-users pull-right"></i>All Users</a>
                             </li>
 
                             <li>
-                                <a href="{{route('admin.users.create')}}">Create User</a>
+                                <a href="{{route('admin.users.create')}}">Create User  <i class="fas fa-user-plus pull-right"></i></a>
                             </li>
 
                         </ul>
@@ -142,30 +145,18 @@
                     </li>
 
                     <li>
-                        <a href="#"><i class="fa fa-wrench fa-fw"></i> Posts<span class="fa arrow"></span></a>
+                        <a href="#"><i class="fas fa-align-justify"></i> Posts<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="{{route('admin.posts.index')}}">All Posts</a>
+                                <a href="{{route('admin.posts.index')}}"><i class="fas fa-align-left pull-right"></i>  All Posts</a>
                             </li>
 
                             <li>
-                                <a href="{{route('admin.posts.create')}}">Create Post</a>
-                            </li>
-
-                        </ul>
-                        <!-- /.nav-second-level -->
-                    </li>
-
-
-                    <li>
-                        <a href="#"><i class="fa fa-wrench fa-fw"></i>Categories<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="{{route('admin.categories.index')}}">All Categories</a>
+                                <a href="{{route('admin.posts.create')}}"><i class="fas fa-pen pull-right"></i>  Create Post</a>
                             </li>
 
                             <li>
-                                <a href="{{route('admin.categories.create')}}">Create Category</a>
+                                <a href="{{route('admin.comments.index')}}"><i class="far fa-comment pull-right" ></i>  All Comments</a>
                             </li>
 
                         </ul>
@@ -174,14 +165,30 @@
 
 
                     <li>
-                        <a href="#"><i class="fa fa-wrench fa-fw"></i>Media<span class="fa arrow"></span></a>
+                        <a href="#"><i class="fas fa-sort-amount-down"></i>  Categories<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="{{route('admin.media.index')}}">All Media</a>
+                                <a href="{{route('admin.categories.index')}}"><i class="fas fa-sort pull-right"></i>  All Categories</a>
+                            </li>
+
+                            {{--<li>--}}
+                                {{--<a href="{{route('admin.categories.create')}}"><i class="fas fa-pen-square pull-right"></i> Create Category</a>--}}
+                            {{--</li>--}}
+
+                        </ul>
+                        <!-- /.nav-second-level -->
+                    </li>
+
+
+                    <li>
+                        <a href="#"><i class="fas fa-image"></i> Media<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="{{route('admin.media.index')}}"> <i class="fas fa-images pull-right"></i> All Media</a>
                             </li>
 
                             <li>
-                                <a href="{{route('admin.media.create')}}">Upload Media</a>
+                                <a href="{{route('admin.media.create')}}"> <i class="fas fa-upload pull-right"></i> Upload Media</a>
                             </li>
 
                         </ul>
@@ -191,93 +198,13 @@
 
 
 
+                        <!-- /.nav-second-level -->
 
-
-
-                    <li>
-                        <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Charts<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="flot.html">Flot Charts</a>
-                            </li>
-                            <li>
-                                <a href="morris.html">Morris.js Charts</a>
-                            </li>
-                        </ul>
-                        <!-- /.nav-second-level -->
-                    </li>
-                    <li>
-                        <a href="tables.html"><i class="fa fa-table fa-fw"></i> Tables</a>
-                    </li>
-                    <li>
-                        <a href="forms.html"><i class="fa fa-edit fa-fw"></i> Forms</a>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-wrench fa-fw"></i> UI Elements<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="panels-wells.html">Panels and Wells</a>
-                            </li>
-                            <li>
-                                <a href="buttons.html">Buttons</a>
-                            </li>
-                            <li>
-                                <a href="notifications.html">Notifications</a>
-                            </li>
-                            <li>
-                                <a href="typography.html">Typography</a>
-                            </li>
-                            <li>
-                                <a href="icons.html"> Icons</a>
-                            </li>
-                            <li>
-                                <a href="grid.html">Grid</a>
-                            </li>
-                        </ul>
-                        <!-- /.nav-second-level -->
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-sitemap fa-fw"></i> Multi-Level Dropdown<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="#">Second Level Item</a>
-                            </li>
-                            <li>
-                                <a href="#">Second Level Item</a>
-                            </li>
-                            <li>
-                                <a href="#">Third Level <span class="fa arrow"></span></a>
-                                <ul class="nav nav-third-level">
-                                    <li>
-                                        <a href="#">Third Level Item</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Third Level Item</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Third Level Item</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Third Level Item</a>
-                                    </li>
-                                </ul>
-                                <!-- /.nav-third-level -->
-                            </li>
-                        </ul>
-                        <!-- /.nav-second-level -->
-                    </li>
-                    <li class="active">
-                        <a href="#"><i class="fa fa-files-o fa-fw"></i> Sample Pages<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a class="active" href="blank.html">Blank Page</a>
-                            </li>
-                            <li>
-                                <a href="login.html">Login Page</a>
-                            </li>
-                        </ul>
-                        <!-- /.nav-second-level -->
-                    </li>
+                    {{--<li class="active">--}}
+                        {{--<a href="#"><i class="fa fa-files-o fa-fw"></i> Sample Pages<span class="fa arrow"></span></a>--}}
+                        {{----}}
+                        {{--<!-- /.nav-second-level -->--}}
+                    {{--</li>--}}
                 </ul>
 
 
@@ -350,7 +277,6 @@
 </div>
 <!-- /#page-wrapper -->
 
-</div>
 <!-- /#wrapper -->
 
 <!-- jQuery -->
